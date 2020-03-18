@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timing on Facebook and Instagram</title>
+</head>
+<link rel="stylesheet" href="fullpage.css">
+
+<body>
+
+    <h1>Timing on Facebook and Instagram</h1>
+
+    <div class="content">
+        <b>Thống kê thời gian vào facebook và Instagram của bạn</b>
+        <br>
+        <br>
+        <label for="meeting-time">Chọn ngày bạn muốn xem thống kê:</label>
+        <input type="date" id="datePicker">
+        <input type="button" class="favorite styled" value="Xem thông tin" id="showInformation">
+        <i id="errorDate" style="font-size: small; color: red; max-height: 0px; visibility: hidden;">
+            <strong> x) </strong>Vui lòng nhập đầy đủ ngày/tháng/năm để tiếp tục</i>
+        <p> Facebook: <span id="informationFacebook" style="color: blue; font-style: italic;">Chọn ngày và click nút "xem thông tin" để xem thống kê</span></p>
+        <p> Instagram: <span id="informationInstagram" style="color: blue; font-style: italic;">Chọn ngày và click nút "xem thông tin" để xem thống kê</span></p>
+        <br>
+        <b>Thiết lập cảnh báo thời gian giới hạn truy cập</b>
+        <br>
+        <br>
+        <label for="meeting-time">Chọn giới hạn thời gian truy cập facebook và instagram trong ngày:</label>
+        <input type="time" id="timePicker">
+        <input type="button" class="favorite styled" value="Đồng ý" id="apply">
+        <input type="button" class="favorite styled" value="Bỏ giới hạn" id="removeMax">
+        <i id="errorTime" style="font-size: small; color: red; max-height: 0px; visibility: hidden;">
+            <strong> x) </strong>Vui lòng nhập đầy đủ giờ/phút để tiếp tục</i>
+        <br>
+        <p>Bạn đã đặt giới hạn thời gian truy cập trong một ngày là: <span id="timeMax" style="color: blue; font-style: italic;"></span></p>
+        <br>
+        <b>Một số lưu ý về extension (vui lòng đọc hết nếu bạn muốn kết quả chính xác nhất):</b>
+        <br>
+        <br>
+        <i>- Trong phần đếm số lần truy cập, tiện ích sẽ bỏ qua những lần refresh lại trang (ấn tải lại hoặc ấn F5), 
+            do đó nếu muốn test chức năng tính số lần truy cập thì hãy đóng hẳn tab và mở lại</i>
+        <br>
+        <br>
+        <i>- Tiện ích sử dụng timestamp để tính thời gian, vậy nên để kết quả chính xác thì vui lòng đồng bộ chính xác thời
+            gian trên máy tính so với thời gian thực tế</i>
+        <br>
+        <br>
+        <i>- Trong phần danh mục extension, khi mở "developer mode " thì sẽ có phần refresh lại extension, 
+            để kết quả chính xác thì vui lòng không refresh nhiều lần, vì mỗi lần refresh lại thì tiện ích sẽ coi như đó là một 
+            phiên hoạt động mới và sẽ cộng thêm lượt truy cập trang lên 1 lần nếu đang sử dụng facebook (instagram), 
+            kể cả khi facebook (instagram) vẫn đang trong lượt sử dụng đó</i>
+        <br>
+        <br>
+        <i>- Trong phần cảnh báo thời gian giới hạn, khi bạn sử dụng quá thời gian giới hạn thì tiện ích sẽ hiển thị một hộp thoại,
+            khi bạn click "ok" thì tiện ích sẽ đóng hết các tab đang sử dụng facebook (instagram) lại, nếu bạn click "cancel" thì cứ 10s
+            sau tiện ích sẽ lại hiển thị hộp thoại đó lên. Khi đã sử dụng quá thời gian giới hạn, bạn chỉ có thể dừng sử dụng facebook (instagram),
+            hoặc cài đặt lại giới hạn của mình
+        </i>
+        <br>
+        <br>
+        <i>- Tiện ích sử dụng local Storage để lưu dữ liệu, nên dữ liệu sẽ mất khi bạn xóa tiện ích hoặc xóa browsing data</i>
+    </div>
+    <script src="fullpage.js"></script>
+
+</body>
+
+</html>

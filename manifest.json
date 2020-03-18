@@ -1,0 +1,23 @@
+{
+    "name": "Timing on Facebook & Instagram",
+    "description": "Chrome Extension",
+    "version": "1.0",
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "16": "icon.png",
+        "128": "icon.png"
+    },
+    "background": {
+        "persistent": false,
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "permissions": [
+        "tabs"
+    ],
+    "manifest_version": 2
+}
