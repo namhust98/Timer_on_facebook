@@ -110,6 +110,7 @@ function setFistTimeFacebook(st) {
         secondTimeFacebook = 0;
         timeStampFacebook = 0;
         firstTimeFacebook = new Date();
+        //cong so lan su dung len 1 va luu vao localStorage
         let number = parseInt(localStorage.getItem(getNameSoLanFacebook())) + 1;
         localStorage.setItem(getNameSoLanFacebook(), number);
         setLoopTimeFacebook();
@@ -122,6 +123,7 @@ function setFistTimeInstagram(st) {
         secondTimeInstagram = 0;
         timeStampInstagram = 0;
         firstTimeInstagram = new Date();
+        //cong so lan su dung len 1 va luu vao localStorage
         let number = parseInt(localStorage.getItem(getNameSoLanInstagram())) + 1;
         localStorage.setItem(getNameSoLanInstagram(), number);
         setLoopTimeInstagram();
@@ -133,6 +135,7 @@ function resetTimeFacebook() {
     firstTimeFacebook = 0;
     secondTimeFacebook = 0;
     timeStampFacebook = 0;
+    //xoa vong lap
     clearInterval(loopTimeFacebook);
     localStorage.setItem("timestampfacebook", 0);
 }
@@ -141,6 +144,7 @@ function resetTimeInstagram() {
     firstTimeInstagram = 0;
     secondTimeInstagram = 0;
     timeStampInstagram = 0;
+    //xoa vong lap
     clearInterval(loopTimeInstagram);
     localStorage.setItem("timestampinstagram", 0);
 }
@@ -167,14 +171,17 @@ function getTimeInstagram() {
 function setLoopTimeFacebook() {
     loopTimeFacebook = setInterval(function() {
         if (getTimeFacebook() != 0) {
+            // neu ham getTimeFacebook() tra ve 0 tuc la nguoi dung ko dung facebook nua
             localStorage.setItem("timestampfacebook", getTimeFacebook());
             let time = localStorage.getItem(getNameThoiGianFacebook());
             time = parseFloat(time) + 1000;
+            //luu thoi gian vao localStorage
             localStorage.setItem(getNameThoiGianFacebook(), time);
         };
     }, 1000);
 }
 
+//tuong tu nhu tren
 function setLoopTimeInstagram() {
     loopTimeInstagram = setInterval(function() {
         if (getTimeInstagram() != 0) {
@@ -188,18 +195,21 @@ function setLoopTimeInstagram() {
 
 //query tat ca cac tab xem co tab nao su dung facebook khong:
 //  *) neu co thi dat a=1, dat lai thoi gian ve 0 neu truoc day chua tinh thoi gian va chay vong lap dem thoi gian
-//  *) neu khong co thi dat a=0
+//  *) neu khong co thi dat a=0 va reset thoi gian
 function setLoopQueryFacebook() {
     loopQueryFacebook = setInterval(function() {
         if (localStorage.getItem(getNameThoiGianFacebook()) == null) {
+            //reset tat ca cac bien va chay lai cac ham khi day la lan dau tien dung facebook trong ngay
             resetTimeOfDay();
         } else {
             chrome.tabs.query({ 'url': "https://*.facebook.com/*" }, function(tab) {
                 if (tab.length != 0) {
+                    //chi tiet ham nay duoc comment phia tren
                     setFistTimeFacebook(a);
                     a = 1;
                 } else {
                     a = 0;
+                    //chi tiet ham nay duoc comment phia tren
                     resetTimeFacebook();
                 }
             });
@@ -266,15 +276,18 @@ function checkMaxTimeFacebook() {
                     timeMax = timeMax - 10;
                     let totalTime = localStorage.getItem(getNameThoiGianFacebook());
                     totalTime = totalTime / 1000;
+                    //so sanh tong thoi gian vs thoi gian Max
                     if (totalTime > timeMax) {
                         if (f == 0) {
                             f = 1;
+                            //hien canh bao
                             showConfirmFacebook();
                         }
                     }
                 }
             } else {
                 f = 0;
+                //xoa vong lap hien canh bao
                 clearInterval(loopMaxTimeFacebook);
             }
         });
@@ -287,8 +300,10 @@ function showConfirmFacebook() {
         let cf = confirm("Bạn đã sử dụng quá thời gian giới hạn! \n" +
             "Click \"OK\" để đóng tất cả các tab đang sử dụng facebook \n" +
             "Click \"Cancel\" để tiếp tục sử dụng facebook \n" +
-            "Trong trường hợp bạn click \"Cancel\", hộp thoại này sẽ liên tục hiện lên sau mỗi 10 giây! Để loại bỏ sự bất tiện này, hãy dừng sử dụng facebook, hoặc thiết lập lại giới hạn thời gian của bạn!");
+            "Trong trường hợp bạn click \"Cancel\", hộp thoại này sẽ liên tục hiện lên sau mỗi 10 giây!" +
+            "Để loại bỏ sự bất tiện này, hãy dừng sử dụng facebook, hoặc thiết lập lại giới hạn thời gian của bạn!");
         if (cf == true) {
+            //neu click "ok" thì dong cac tab su dung facebook và xoa vong lap
             f = 0;
             chrome.tabs.query({ 'url': "https://*.facebook.com/*" }, function(tab) {
                 let i = tab.length;
@@ -298,6 +313,7 @@ function showConfirmFacebook() {
             });
             clearInterval(loopMaxTimeFacebook);
         } else {
+            //neu click "cancel" thi cu 10s 1 lan hien canh bao
             f = 1;
         }
     }, 10000);
@@ -362,6 +378,7 @@ s = 1;
 setLoopQueryInstagram();
 t = 1;
 
+//chay vong lap kiem tra thoi gian gioi han
 checkMaxTimeFacebook();
 
 checkMaxTimeInstagram();
